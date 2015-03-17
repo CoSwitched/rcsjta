@@ -41,11 +41,7 @@ import com.gsma.rcs.provider.eab.ContactsManager;
 import com.gsma.rcs.provider.messaging.GroupChatStateAndReasonCode;
 import com.gsma.rcs.provider.messaging.MessagingLog;
 import com.gsma.rcs.provider.settings.RcsSettings;
-import com.gsma.rcs.provider.settings.RcsSettingsData;
 import com.gsma.rcs.provider.settings.RcsSettingsData.ImSessionStartMode;
-import com.gsma.rcs.service.DequeueTask;
-import com.gsma.rcs.service.api.ServerApiException;
-import com.gsma.rcs.service.broadcaster.GroupFileTransferBroadcaster;
 import com.gsma.rcs.service.broadcaster.IGroupChatEventBroadcaster;
 import com.gsma.rcs.utils.logger.Logger;
 import com.gsma.services.rcs.Geoloc;
@@ -271,6 +267,11 @@ public class GroupChatImpl extends IGroupChat.Stub implements GroupChatSessionLi
         return false;
     }
 
+    /**
+     * Checks if group chat is established
+     * 
+     * @return True if group chat is established
+     */
     private boolean isGroupChatSessionEstablished() {
         GroupChatSession session = mImService.getGroupChatSession(mChatId);
         return session != null && session.isMediaEstablished();
@@ -678,6 +679,7 @@ public class GroupChatImpl extends IGroupChat.Stub implements GroupChatSessionLi
             }
         }
     }
+
     /**
      * Add group chat message to Db
      * 
@@ -865,7 +867,7 @@ public class GroupChatImpl extends IGroupChat.Stub implements GroupChatSessionLi
      * Sends an is-composing event. The status is set to true when typing a message, else it is set
      * to false.
      * 
-     * @see RcsSettingsData.ImSessionStartMode
+     * @see ImSessionStartMode
      * @param status Is-composing status
      */
     public void sendIsComposingEvent(final boolean status) {
@@ -967,7 +969,7 @@ public class GroupChatImpl extends IGroupChat.Stub implements GroupChatSessionLi
      * open the chat conversation. Note: if its an incoming pending chat session and the parameter
      * IM SESSION START is 0 then the session is accepted now.
      * 
-     * @see RcsSettingsData.ImSessionStartMode
+     * @see ImSessionStartMode
      */
     public void openChat() {
         if (logger.isActivated()) {

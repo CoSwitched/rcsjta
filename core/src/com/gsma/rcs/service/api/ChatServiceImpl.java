@@ -31,7 +31,6 @@ import com.gsma.rcs.core.ims.service.im.chat.GroupChatPersistedStorageAccessor;
 import com.gsma.rcs.core.ims.service.im.chat.GroupChatSession;
 import com.gsma.rcs.core.ims.service.im.chat.OneToOneChatSession;
 import com.gsma.rcs.core.ims.service.im.chat.imdn.ImdnDocument;
-import com.gsma.rcs.platform.AndroidFactory;
 import com.gsma.rcs.provider.eab.ContactsManager;
 import com.gsma.rcs.provider.messaging.MessagingLog;
 import com.gsma.rcs.provider.settings.RcsSettings;
@@ -66,8 +65,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 /**
  * Chat service implementation
@@ -466,7 +463,8 @@ public class ChatServiceImpl extends IChatService.Stub {
             GroupChatPersistedStorageAccessor storageAccessor = new GroupChatPersistedStorageAccessor(
                     chatId, subject, Direction.OUTGOING, mMessagingLog, mRcsSettings);
             GroupChatImpl groupChat = new GroupChatImpl(chatId, mGroupChatEventBroadcaster,
-                    mImService, storageAccessor, mRcsSettings, mContactManager, this, mMessagingLog, mCore);
+                    mImService, storageAccessor, mRcsSettings, mContactManager, this,
+                    mMessagingLog, mCore);
             session.addListener(groupChat);
 
             mMessagingLog.addGroupChat(session.getContributionID(), session.getRemoteContact(),

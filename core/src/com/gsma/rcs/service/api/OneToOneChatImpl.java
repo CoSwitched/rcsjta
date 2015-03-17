@@ -643,7 +643,9 @@ public class OneToOneChatImpl extends IOneToOneChat.Stub implements OneToOneChat
                                 Status.FAILED, ReasonCode.FAILED_SEND);
                         break;
                     }
-                    mCore.getListener().tryToMarkQueuedOneToOneChatMessagesAndOneToOneFileTransfersAsFailed(mContact);
+                    mCore.getListener()
+                            .tryToMarkQueuedOneToOneChatMessagesAndOneToOneFileTransfersAsFailed(
+                                    mContact);
                 default:
                     break;
             }

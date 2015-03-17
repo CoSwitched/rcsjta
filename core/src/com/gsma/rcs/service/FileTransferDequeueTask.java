@@ -81,8 +81,7 @@ import android.net.Uri;
                         } else {
                             if (isAllowedToDequeueGroupFileTransfer(chatId)) {
                                 mFileTransferService.dequeueGroupFileTransfer(fileTransferId,
-                                        content,
-                                        fileIconContent, chatId);
+                                        content, fileIconContent, chatId);
                             }
                         }
                     } catch (SecurityException e) {
